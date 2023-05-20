@@ -30,8 +30,29 @@ function solution(keymap, targets) {
   return answer;
 }
 
-console.log(solution(["ABACD", "BCEFD"], ["ABCD", "AABB"]));
-console.log(solution(["AA"], ["B"]));
+function solution2(keymap, targets) {
+  const answer = [];
+  const map = {};
+  for (const items of keymap) {
+    items
+      .split("")
+      .map(
+        (item, index) =>
+          (map[item] = map[item] < index + 1 ? map[item] : index + 1)
+      );
+  }
+  for (const items of targets) {
+    //NaN이 false인걸 이용한 다른분의 코드
+    answer.push(
+      items.split("").reduce((cur, item) => (cur += map[item]), 0) || -1
+    );
+  }
+  return answer;
+}
+console.log(Boolean(NaN));
+
+// console.log(solution(["ABACD", "BCEFD"], ["ABCD", "AABB"]));
+// console.log(solution(["AA"], ["B"]));
 
 // const least = { A: 1 };
 // console.log(least["B"]);
