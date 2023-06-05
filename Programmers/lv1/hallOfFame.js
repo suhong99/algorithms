@@ -19,3 +19,21 @@ function solution(k, score) {
   });
   return answer;
 }
+
+//다른 사람 풀이
+function solution(k, score) {
+  const stack = [];
+  return score.reduce((a, c) => {
+    if (stack.length < k) {
+      stack.push(c);
+      stack.sort((a, b) => a - b);
+    } else {
+      stack.push(c);
+      stack.sort((a, b) => a - b);
+      stack.shift();
+    }
+    a.push(stack[0]);
+    return a;
+  }, []);
+}
+// 내장 함수 sort와 shift를 씀. 근데 애초에 미리 정리하면 될 걸 계쏙 돌리면 시간 복잡도가 오름. 내 코드가 나을듯?
