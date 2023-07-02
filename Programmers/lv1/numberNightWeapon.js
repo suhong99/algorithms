@@ -23,12 +23,27 @@ function solution(number, limit, power) {
 //console.log(solution(5, 3, 2));
 
 //시간초과
-function solution(number, limit, power) {
-  let answer = 1;
-  for (let i = 2; i <= number; i++) {
-    let current = i;
-    let deviderList = {};
+function solution1(number, limit, power) {
+  let answer = 0;
+  //약수의 개수
+  for (let j = 1; j <= number; j++) {
+    let count = 0;
+    for (let i = 1; i <= Math.sqrt(j); i++) {
+      if (j % i === 0) {
+        if (j / i != i) {
+          count += 2;
+        } else {
+          count++;
+        }
+      }
+    }
+    if (count <= limit) {
+      answer += count;
+    } else {
+      answer += power;
+    }
   }
+
   return answer;
 }
 
