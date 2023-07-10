@@ -21,10 +21,20 @@ function solution(nums) {
   const prime = new Array(nums + 1).fill(1);
   console.log(prime + " 프라임");
   let count = nums - 1;
-  for (let i = 2; i < Math.sqrt(nums); i++)
-    if (prime[i])
-      for (let j = i ** 2; j <= nums; j += i)
+  for (let i = 2; i < Math.sqrt(nums); i++) {
+    if (prime[i]) {
+      console.log(prime[i] + " 프라임[i]" + i);
+
+      for (let j = i ** 2; j <= nums; j += i) {
+        console.log(prime + "프라임");
+
+        console.log(prime[j] + " 프라임[j]" + j);
+
         if (prime[j]) count--, (prime[j] = 0);
+      }
+    }
+  }
+  console.log(count);
   return count;
 }
 
