@@ -34,6 +34,7 @@ function solution(nums) {
       }
     }
   }
+  console.log(prime + "마지막");
   console.log(count);
   return count;
 }
