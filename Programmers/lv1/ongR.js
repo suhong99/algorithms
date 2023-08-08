@@ -45,9 +45,9 @@ function solution2(babbling) {
   );
 }
 const regexp3 = /(aya|ye|woo|ma)\1+/;
-const regexp4 = /^(aya|ye|woo|ma)+$/;
 
 console.log(!regexp3.test("ayahye"));
+const regexp4 = /^(aya|ye|woo|ma)+$/;
 console.log(regexp4.test("ayahye"));
 
 // console.log(solution2(["aya", "yee", "u", "maa", "ayahye"]));
