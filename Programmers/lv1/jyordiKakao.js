@@ -25,9 +25,6 @@ function solution(board, moves) {
       if (board[n - maxCounts[place - 1]][place - 1] !== bucket[0]) {
         bucket.unshift(board[n - maxCounts[place - 1]][place - 1]);
       } else {
-        // console.log(bucket[0] + "bucket[0]");
-        // console.log(bucket[0] + "bucket[0]");
-
         // 기존에 있는거 제거 후 삭제된 개수 2개 증가
         bucket.splice(0, 1);
         answer += 2;
@@ -51,17 +48,11 @@ solution(
   [1, 5, 3, 5, 1, 2, 1, 4]
 );
 
-const transpose = (matrix) =>
-  matrix.reduce(
-    (result, row) => row.map((_, i) => [...(result[i] || []), row[i]]),
-    []
-  );
+const transpose = (matrix) => matrix.reduce((result, row) => row.map((_, i) => [...(result[i] || []), row[i]]), []);
 
 // 다른 사람의 풀이
 const solution2 = (board, moves) => {
-  const stacks = transpose(board).map((row) =>
-    row.reverse().filter((el) => el !== 0)
-  );
+  const stacks = transpose(board).map((row) => row.reverse().filter((el) => el !== 0));
   const basket = [];
   let result = 0;
 
