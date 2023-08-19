@@ -42,7 +42,6 @@ function solution(numbers, hand) {
       whichHand(number);
     }
   });
-  console.log(answer);
   return answer;
 }
 
