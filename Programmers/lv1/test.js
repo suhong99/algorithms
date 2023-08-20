@@ -41,3 +41,15 @@
 
 let students = new Array(5).fill(1);
 console.log(students);
+
+//
+
+const socialLog = {
+  kakao: { img: '카카오이미지', background: '' },
+  google: { img: '구글이미지', background: '' },
+};
+
+const select = (key) => {
+  console.log(socialLog[key].img);
+};
+select('kakao');
