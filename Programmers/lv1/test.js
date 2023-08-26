@@ -53,3 +53,5 @@ const select = (key) => {
   console.log(socialLog[key].img);
 };
 select('kakao');
+
+//  테스트
