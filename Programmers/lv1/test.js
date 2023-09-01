@@ -45,13 +45,19 @@ console.log(students);
 //
 
 const socialLog = {
-  kakao: { img: '카카오이미지', background: '' },
-  google: { img: '구글이미지', background: '' },
+  kakao: { img: "카카오이미지", background: "" },
+  google: { img: "구글이미지", background: "" },
 };
 
 const select = (key) => {
   console.log(socialLog[key].img);
 };
-select('kakao');
+select("kakao");
 
 //  테스트
+
+const value = "example123@example.com";
+
+const legTest = /^[a-zA-Z0-9]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+console.log(legTest.test(value));
