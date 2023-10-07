@@ -66,4 +66,3 @@ const testArray = [0, 0];
 
 testArray[1]++;
 
-console.log(testArray);
