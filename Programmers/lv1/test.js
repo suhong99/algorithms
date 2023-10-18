@@ -65,4 +65,3 @@ console.log(legTest.test(value));
 const testArray = [0, 0];
 
 testArray[1]++;
-
