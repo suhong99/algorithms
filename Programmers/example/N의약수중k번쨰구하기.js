@@ -16,4 +16,15 @@ function test1(targetNumber, grade) {
   }
 }
 
-console.log(test1(100, 4), '풀이');
+function test2(targetNumber, grade) {
+  const array = [];
+  for (let i = 1; i <= targetNumber; i++) {
+    if (targetNumber % i === 0) {
+      array.push(i);
+    }
+  }
+  return array[grade - 1];
+}
+
+// console.log(test1(120000000, 4), '1번 풀이');
+console.log(test2(120000000, 4), '2번 풀이');
