@@ -31,7 +31,10 @@
 
 // console.log(count);
 
-const [min, max] = [50000000, 51000000];
+/*
+
+// 중첩 처리가 완벽치 않음
+const [min, max] = [1, 1000];
 
 let count = max - min + 1;
 
@@ -45,6 +48,7 @@ for (let i = 2; i <= Math.sqrt(max); i++) {
   }
 }
 
+console.log(prime);
 for (let i = 2; i <= Math.sqrt(max); i++) {
   if (prime[i]) {
     count -= Math.floor(max / (i * i));
@@ -53,3 +57,46 @@ for (let i = 2; i <= Math.sqrt(max); i++) {
 }
 
 console.log(count);
+
+*/
+
+function sieveOfEratosthenes(max) {
+  const isPrime = new Array(max + 1).fill(true);
+  isPrime[0] = isPrime[1] = false;
+
+  for (let p = 2; p * p <= max; p++) {
+    if (isPrime[p]) {
+      for (let i = p * p; i <= max; i += p) {
+        isPrime[i] = false;
+      }
+    }
+  }
+
+  const primes = [];
+  for (let i = 2; i <= max; i++) {
+    if (isPrime[i]) {
+      primes.push(i);
+    }
+  }
+
+  return primes;
+}
+
+const [min, max] = [30000, 510000];
+let count = max - min + 1;
+
+const maxSqrt = Math.floor(Math.sqrt(max));
+const primeNumber = sieveOfEratosthenes(maxSqrt);
+
+let notNoNo = new Set();
+
+for (let i = 0; i < primeNumber.length; i++) {
+  const primeDouble = primeNumber[i] * primeNumber[i];
+  const startPoint = Math.ceil(min / primeDouble);
+
+  for (let j = startPoint; j <= max / primeDouble; j++) {
+    notNoNo.add(j * primeDouble);
+  }
+}
+
+console.log(count - notNoNo.size);
