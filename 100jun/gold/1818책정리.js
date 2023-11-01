@@ -7,7 +7,7 @@ let v = [];
 
 let a = input[1].split(' ').map(Number);
 v.push(a[0]);
-for (let i = 1; i < N; i++) {
+for (let i = 1; i < bookCount; i++) {
   const idx = v.findIndex((element) => element >= a[i]);
   if (idx !== -1) {
     v[idx] = a[i];
@@ -16,4 +16,4 @@ for (let i = 1; i < N; i++) {
   }
 }
 
-console.log(N - v.length);
+console.log(bookCount - v.length);
