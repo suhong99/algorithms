@@ -4,15 +4,16 @@ const input = fs
   .toString()
   .split('\n');
 
-const bookCount = +input[0];
-
 let arr = input[1].split(' ').map(Number);
 
 function lowerBound(arr, target, start, end) {
   while (start < end) {
-    let mid = parseInt((start + end) / 2);
-    if (arr[mid] >= target) end = mid;
-    else start = mid + 1;
+    let mid = Math.floor((start + end) / 2);
+    if (arr[mid] >= target) {
+      end = mid;
+    } else {
+      start = mid + 1;
+    }
   }
   return end;
 }
@@ -26,4 +27,5 @@ for (x of arr) {
     d[index] = x;
   }
 }
-console.log(bookCount - (d.length - 1));
+
+console.log(d.length - 1);
