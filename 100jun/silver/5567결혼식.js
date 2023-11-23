@@ -31,4 +31,8 @@ class Queue {
   }
 }
 
-const queue = new Queue();
+const fs = require('fs');
+const input = fs
+  .readFileSync(__dirname + '/input.txt')
+  .toString()
+  .split('\n');
