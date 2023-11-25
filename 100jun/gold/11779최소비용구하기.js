@@ -84,59 +84,42 @@ const input = fs
   .toString()
   .split('\n');
 
-const INF = 1e11;
-const [n, m, x] = input[0].split(' ').map(Number);
+const n = +input[0];
+const m = +input[1];
 
 let graph = Array.from(Array(n + 1), () => []);
-let graph2 = Array.from(Array(n + 1), () => []);
-let distance = new Array(n + 1).fill(INF);
-let distance2 = new Array(n + 1).fill(INF);
-
-for (let i = 1; i <= m; i++) {
+for (let i = 2; i <= m + 1; i++) {
   let [a, b, c] = input[i].split(' ').map(Number);
   graph[a].push([b, c]);
-  graph2[b].push([a, c]);
 }
 
+const [start, end] = input[m + 2].split(' ').map(Number);
+const INF = 1e17;
+
+let distance = Array.from(Array(n + 1), () => [INF, []]);
 function dijkstra(start) {
   let pq = new PriorityQueue((a, b) => b[0] - a[0]);
-  let pq2 = new PriorityQueue((a, b) => b[0] - a[0]);
-
-  pq.enq([0, start]);
-  pq2.enq([0, start]);
-
-  distance[start] = 0;
-  distance2[start] = 0;
+  pq.enq([0, start, [start]]);
+  distance[start][0] = 0;
+  distance[start][1].push(start);
   while (pq.size() != 0) {
-    let [dist, now] = pq.deq();
-    if (distance[now] < dist) continue;
+    let [dist, now, nodes] = pq.deq();
+    if (distance[now][0] < dist) continue;
     for (let i of graph[now]) {
       let cost = dist + i[1];
-      if (cost < distance[i[0]]) {
-        distance[i[0]] = cost;
-        pq.enq([cost, i[0]]);
-      }
-    }
-  }
-
-  while (pq2.size() != 0) {
-    let [dist, now] = pq2.deq();
-    if (distance2[now] < dist) continue;
-    for (let i of graph2[now]) {
-      let cost = dist + i[1];
-      if (cost < distance2[i[0]]) {
-        distance2[i[0]] = cost;
-        pq2.enq([cost, i[0]]);
+      if (cost < distance[i[0]][0]) {
+        const newNodes = [...nodes, i[0]];
+        distance[i[0]] = [cost, newNodes];
+        pq.enq([cost, i[0], newNodes]);
       }
     }
   }
 }
 
-dijkstra(x);
+dijkstra(start);
 
-let answer = 0;
-for (let i = 1; i < n + 1; i++) {
-  answer = Math.max(answer, distance[i] + distance2[i]);
-}
+let answer = distance[end][0];
+answer += '\n' + distance[end][1].length;
+answer += '\n' + distance[end][1].join(' ');
 
 console.log(answer);
