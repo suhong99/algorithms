@@ -85,42 +85,40 @@ const input = fs
   .split('\n');
 
 const INF = 1e17;
-let [n, m, k] = input[0].split(' ').map(Number);
-let graph = [];
-for (let i = 0; i <= n; i++) graph.push([]);
-for (let i = 1; i <= m; i++) {
+const [n, m] = input[0].split(' ').map(Number);
+const start = +input[1];
+let graph = Array.from(Array(n + 1), () => []);
+
+for (let i = 2; i <= m + 1; i++) {
   let [a, b, c] = input[i].split(' ').map(Number);
   graph[a].push([b, c]);
-  graph[b].push([a, c]);
 }
-
-let distance = [new Array(k + 1).fill(INF)];
-for (let i = 1; i <= n; i++) distance[i] = new Array(k + 1).fill(INF);
-dijkstra(1);
-let result = INF;
-for (let i = 0; i <= k; i++) {
-  result = Math.min(result, distance[n][i]);
-}
-
-console.log(distance);
+let distance = new Array(n + 1).fill(INF);
 function dijkstra(start) {
   let pq = new PriorityQueue((a, b) => b[0] - a[0]);
-  pq.enq([0, start, 0]);
-  distance[start][0] = 0;
+  pq.enq([0, start]);
+  distance[start] = 0;
   while (pq.size() != 0) {
-    let [dist, now, paved] = pq.deq();
-    if (distance[now][paved] < dist) continue;
+    let [dist, now] = pq.deq();
+    if (distance[now] < dist) continue;
     for (let i of graph[now]) {
       let cost = dist + i[1];
-      if (cost < distance[i[0]][paved]) {
-        distance[i[0]][paved] = cost;
-        pq.enq([cost, i[0], paved]);
-      }
-      if (paved < k && dist < distance[i[0]][paved + 1]) {
-        distance[i[0]][paved + 1] = dist;
-        pq.enq([dist, i[0], paved + 1]);
+      if (cost < distance[i[0]]) {
+        distance[i[0]] = cost;
+        pq.enq([cost, i[0]]);
       }
     }
+  }
+}
+
+dijkstra(start);
+
+let result = '';
+for (let i = 1; i <= n; i++) {
+  if (distance[i] === INF) {
+    result += 'INF' + '\n';
+  } else {
+    result += distance[i] + '\n';
   }
 }
 
