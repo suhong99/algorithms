@@ -24,7 +24,6 @@ for (let i = 1; i <= n; i++) {
 for (let i = 0; i < c; i++) {
   fishing(i);
   move();
-  //   console.log(graph, answer, i, '번째');
 }
 
 function fishing(y) {
@@ -57,7 +56,6 @@ function move() {
         if (d === 2) {
           if (s < r - 1 - i) {
             newX = i + s;
-
             eating(newX, j, [s, d, z]);
           } else if (s < 2 * r - 2 - i) {
             newX = xCount - s - i;
