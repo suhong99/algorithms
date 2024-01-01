@@ -1,8 +1,3 @@
-function solution(operations) {
-  var answer = [];
-  return answer;
-}
-
 function PriorityQueue(comparator) {
   this._comparator = comparator;
   this._elements = [];
@@ -17,7 +12,7 @@ PriorityQueue.prototype.peek = function () {
   return this._elements[0];
 };
 
-PriorityQueue.prototype.deq = function () {
+PriorityQueue.prototype.deq = function (value) {
   let first = this.peek();
   let last = this._elements.pop();
   let size = this.size();
@@ -82,3 +77,24 @@ PriorityQueue.prototype._swap = function (a, b) {
   this._elements[a] = this._elements[b];
   this._elements[b] = aux;
 };
+
+function solution(operations) {
+  let queue = new PriorityQueue((a, b) => b[0] - a[0]);
+  operations.forEach((e) => {
+    const [operator, value] = e.split(' ');
+    if (operator === 'I') {
+      queue.enq(Number(value));
+    }else{
+        if(queue.isEmpty){
+            return
+        }
+        if(queue.)
+    }
+  });
+  var answer = [];
+  return answer;
+}
+
+console.log(
+  solution(['I 16', 'I -5643', 'D -1', 'D 1', 'D 1', 'I 123', 'D -1'])
+);
