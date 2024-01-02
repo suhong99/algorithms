@@ -19,8 +19,11 @@ class MinHeap {
   }
 
   pop(isTopPop) {
+    // 최소 최대여부 isTopPop으로 구분
     if (this.isEmpty()) return;
+    // null이외의 값이 없으면 그 값이 최대 최소
     if (this.heap.length === 2) return this.heap.pop();
+    // 힙구조에서 부모 추출후 재 정렬
     if (!isTopPop) {
       const parentIndex = Math.floor((this.heap.length - 1) / 2);
       const lastLeaf = this.heap.slice(parentIndex);
@@ -29,6 +32,7 @@ class MinHeap {
       return this.heap.pop();
     }
 
+    //최소 추출
     const val = this.heap[1];
     this.heap[1] = this.heap.pop();
 
