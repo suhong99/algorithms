@@ -54,14 +54,14 @@ function solution(stones, k) {
 //   return answer;
 // }
 
+// 더 느림
 function solution(stones, k) {
   const arrayLength = stones.length;
   if (arrayLength <= k) {
     return Math.max(...stones);
   }
 
-  let answer = stones[0];
-
+  let answer = Math.max(...stones.slice(0, k));
   for (let i = 0; i < arrayLength - k; i++) {
     let max = 0;
     const current = stones[i];
@@ -71,10 +71,12 @@ function solution(stones, k) {
         flag = true;
         break;
       }
-      max = Math.max(max, stones[i + j]);
+      if (stones[i + j] > max) {
+        max = stones[i + j];
+      }
     }
-    if (!flag) {
-      answer = Math.min(answer, max);
+    if (max < answer && !flag) {
+      answer = max;
     }
   }
   return answer;
