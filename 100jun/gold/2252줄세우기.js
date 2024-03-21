@@ -15,7 +15,6 @@ for (let i = 1; i <= m; i++) {
   graph[small].push(big);
   inDegrees[big] += 1;
 }
-
 const queue = [];
 for (let i = 1; i <= n; i++) {
   if (!inDegrees[i]) {
