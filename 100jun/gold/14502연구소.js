@@ -19,10 +19,12 @@ let result = 0;
 
 function virus(x, y) {
   for (let i = 0; i < 4; i++) {
+    // 상화좌우 퍼뜨림
     let nx = x + dx[i];
     let ny = y + dy[i];
     if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
     if (temp[nx][ny] === 0) {
+      // 미감염 지역이면 확장시키고 해당 위치에서 다시 퍼뜨림
       temp[nx][ny] = 2;
       virus(nx, ny);
     }
