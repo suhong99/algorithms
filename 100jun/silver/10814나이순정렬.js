@@ -10,7 +10,13 @@ input.sort((a, b) => {
   if (!name || !name2) {
     return 0;
   }
-  return Number(age) >= Number(age2) ? 1 : -1;
+  // return Number(age) >= Number(age2) ? 1 : -1;
+  //이름순까지 정렬
+  return Number(age) > Number(age2)
+    ? 1
+    : Number(age) === Number(age2)
+    ? name.localeCompare(name2)
+    : -1;
 });
 
 let answer = '';
