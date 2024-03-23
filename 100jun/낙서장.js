@@ -1,5 +1,5 @@
 // 뒤에값이 더 크면 최소힙(다익스트라), 앞이면 최대힙
-//최대힙
+//최소힙
 // let pq = new PriorityQueue((a, b) => b[0] - a[0]);
 class PriorityQueue {
   constructor(comparator) {
@@ -16,6 +16,7 @@ class PriorityQueue {
     let size = this._elements.push(element);
     let current = size - 1;
 
+    // 최상 노드 될떄까지
     while (current > 0) {
       let parent = Math.floor((current - 1) / 2);
 
@@ -28,12 +29,16 @@ class PriorityQueue {
   }
 
   deq = function () {
+    // 부모
     let first = this.peek();
+    // 우선순위 가장 낮은애
     let last = this._elements.pop();
+    // 한개 추출한 후의 사이즈
     let size = this.size();
 
     if (size === 0) return first;
 
+    // 우선순위 낮은애를 부모로 만듬
     this._elements[0] = last;
     let current = 0;
     while (current < size) {
@@ -45,7 +50,7 @@ class PriorityQueue {
         largest = left;
       }
 
-      if (right < size && this._comparator(right, largest) >= 0) {
+      if (right < size && this._compare(right, largest) >= 0) {
         largest = right;
       }
 

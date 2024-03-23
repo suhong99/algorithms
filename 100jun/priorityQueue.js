@@ -190,7 +190,7 @@ class PriorityQueue {
 //     let last = this._elements.pop();
 //     let size = this.size();
 
-if (size === 0) return first;
+// if (size === 0) return first;
 
 //     this._elements[0] = last;
 //     let current = 0;

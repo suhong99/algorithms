@@ -22,6 +22,7 @@ for (let i = 0; i < n; i++) {
   }
 }
 
+// 색약 구별 못하니 그래프 수정후 다시 실행
 for (let i = 0; i < n; i++) {
   for (let j = 0; j < n; j++) {
     if (graph[i][j] === 'R') {
@@ -40,6 +41,7 @@ for (let i = 0; i < n; i++) {
     if (dfs(i, j)) result2++;
   }
 }
+
 function dfs(x, y) {
   if (!visited[x][y]) {
     visited[x][y] = true;
