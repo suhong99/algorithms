@@ -42,14 +42,14 @@ function solution(name) {
     }
     return minVerticalMove(e);
   });
-  let sum =
-    verticalCounts.reduce((a, c) => a + c, 0) + verticalCounts.length - 1;
+  const verticalMove = verticalCounts.reduce((a, c) => a + c, 0);
 
   if (firstAIdx === -1) {
-    return sum;
+    return verticalMove + verticalCounts.length - 1;
   }
 
-  return sum;
+  const horizontalMove = minHorizontalMove(verticalCounts);
+  return verticalMove + horizontalMove;
 }
 
 function minVerticalMove(target) {
@@ -57,21 +57,40 @@ function minVerticalMove(target) {
   return Math.min(distance, 26 - distance);
 }
 
-function minRouteFinder(array) {
-  let left = 1;
-  let right = 1;
+function minHorizontalMove(array) {
   const length = array.length;
-  while (right < length) {}
+  let move = length - 1;
+  let discountArea = 0;
+  for (let i = 1; i < length; i++) {
+    if (array[i] === 0) {
+      discountArea++;
+      if (i === length - 1) {
+        move = Math.min(move, length - discountArea - 1);
+        break;
+      }
+
+      if (array[i + 1] !== 0) {
+        let leftArea = length - i - 1;
+        let movedArea = i - discountArea;
+        let currentMove = movedArea + leftArea + Math.min(movedArea, leftArea);
+
+        move = Math.min(move, currentMove);
+      }
+    } else {
+      discountArea = 0;
+    }
+  }
+  return move;
 }
 // console.log(solution('JEROEN')); //56
-// console.log(solution('JAN')); //23
+console.log(solution('JAN')); //23
 // console.log(solution('JNAAA')); // 23
-// console.log(solution('JZAAAZ')); //14 // 그냥 가면 5칸 이동, 오른쪽에서 돌면 3칸 이득 2개
+// console.log(solution('JZZAAAZ')); //16
 // console.log(solution('JZZAAA')); // 13
 // console.log(solution('J')); //9
 // console.log(solution('N')); //13
-console.log(solution('A')); // 0
+// console.log(solution('A')); // 0
 
 // console.log(solution('A'), solution('I'), solution('P'), solution('B'));
 // // console.log(solution('BAABBAAA')); //7
-console.log(solution('ABABAAAAAAABA')); //11
+console.log(solution('ABABAAAAAAABA')); //10  // 13단어
