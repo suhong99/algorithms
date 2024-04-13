@@ -22,8 +22,7 @@ for (let t = 1; t <= T; t++) {
 
   index += k;
   const target = input[index++];
-  countTotal(target);
-  console.log(minBuild[target]);
+  console.log(countTotal(target));
 
   function countTotal(number) {
     while (true) {
