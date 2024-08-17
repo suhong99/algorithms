@@ -1,16 +1,23 @@
-function solution(k, d) {
+function solution(nums) {
   let answer = 0;
-  const maxSqrt = d ** 2;
-  for (let i = 0; i <= d; i += k) {
-    console.log(
-      i,
-      answer,
-      'Add : ',
-      Math.floor(Math.sqrt(maxSqrt - i ** 2) / k) + 1
-    );
-    answer += Math.floor(Math.sqrt(maxSqrt - i ** 2) / k) + 1;
+  const prime = Array(3000).fill(0);
+  for (let i = 2; i < Math.sqrt(3000); i++) {
+    if (!prime[i]) {
+      for (let j = 2; j <= 3000 / i; j++) {
+        if (!prime[i * j]) prime[i * j] = 1;
+      }
+    }
   }
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    for (let j = i + 1; j < nums.length - 1; j++) {
+      for (let k = j + 1; k < nums.length; k++) {
+        if (prime[nums[i] + nums[j] + nums[k]] === 0) answer++;
+      }
+    }
+  }
+
   return answer;
 }
 
-console.log(solution(2, 4));
+console.log(solution([1, 2, 7, 6, 4]));
