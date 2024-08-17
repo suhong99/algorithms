@@ -1,3 +1,8 @@
+//result는 record에서 change만큼 감소됨
+// 결국 uid는 최종 입장 혹은 변경한 id가 됨
+// uid만 기억하고, 배열에 uid에 따른 현재 닉네임을 기록함.
+// 이후 입장 혹은 변경시 닉네임 바꾸기
+
 function solution(record) {
   const answer = [];
   const nameList = {};
