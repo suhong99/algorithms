@@ -29,7 +29,11 @@ function solution(edges) {
   const max = Math.max(graphIn.length, graphOut.length);
 
   for (let i = 1; i < graphIn.length; i++) {
-    if (graphIn[i] === undefined && graphOut[i].length > 1) {
+    if (
+      graphIn[i] === undefined &&
+      graphOut[i] !== undefined &&
+      graphOut[i].length > 1
+    ) {
       point = i;
       break;
     }
@@ -40,18 +44,30 @@ function solution(edges) {
     graphIn[element] = graphIn[element].filter((e) => e !== point);
   });
 
+  let donut = connected.length;
+
   for (let i = 1; i < max; i++) {
     if (i === point) continue;
-    if (graphIn[i] === undefined || graphIn[i].length === 0) {
+    if (donut === 0) break;
+
+    if (graphIn[i] === undefined && graphOut[i] !== undefined) {
       stick++;
+      donut--;
+      continue;
+    }
+
+    if (graphIn[i] !== undefined && graphIn[i].length === 0) {
+      stick++;
+      donut--;
       continue;
     }
     if (graphOut[i] && graphOut[i].length === 2) {
       oct++;
+      donut--;
     }
   }
 
-  return [point, connected.length - stick - oct, stick, oct];
+  return [point, donut, stick, oct];
 }
 
 function insert(i, val, arr) {
@@ -61,11 +77,42 @@ function insert(i, val, arr) {
     arr[i].push(val);
   }
 }
+
 console.log(
   solution([
-    [2, 3],
-    [4, 3],
-    [1, 1],
-    [2, 1],
+    [1, 12],
+    [8, 3],
+    [12, 7],
+    [7, 11],
+    [9, 6],
+    [10, 11],
+    [6, 10],
+    [3, 5],
+    [11, 1],
+    [5, 3],
+    [11, 9],
+    [3, 8],
+    [4, 11],
+    [4, 8],
+  ])
+);
+
+console.log(
+  solution([
+    [4, 11],
+    [1, 12],
+    [8, 3],
+    [12, 7],
+    [4, 2],
+    [7, 11],
+    [4, 8],
+    [9, 6],
+    [10, 11],
+    [6, 10],
+    [3, 5],
+    [11, 1],
+    [5, 3],
+    [11, 9],
+    [3, 8],
   ])
 );
