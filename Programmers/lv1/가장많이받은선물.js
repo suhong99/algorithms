@@ -38,4 +38,38 @@ function solution(friends, gifts) {
   return Math.max(...gift);
 }
 
+// 아래 코드가 더 빠름.
+// 이유 : 나는 주고 받는 거 모든 음양으로 기록해씅ㅁ
+// 사실 줬다는 사실만 기록해도 충분하고, 대칭되는 열을 비교하는게 빠름
+
+function solution(friends, gifts) {
+  const length = friends.length;
+  const giftPoints = new Array(length).fill(0);
+  const index = {};
+  const record = [];
+  const points = new Array(length).fill(0);
+  for (let i = 0; i < length; i++) {
+    record[i] = new Array(length).fill(0);
+    index[friends[i]] = i;
+  }
+  for (const gift of gifts) {
+    const [giver, taker] = gift.split(' ');
+    record[index[giver]][index[taker]] += 1;
+    giftPoints[index[giver]] += 1;
+    giftPoints[index[taker]] -= 1;
+  }
+  for (let i = 0; i < length; i++) {
+    for (let j = 0; j < length; j++) {
+      if (record[i][j] > record[j][i]) {
+        points[i] += 1;
+      } else if (record[i][j] === record[j][i]) {
+        if (giftPoints[i] > giftPoints[j]) {
+          points[i] += 1;
+        }
+      }
+    }
+  }
+  return Math.max(...points);
+}
+
 solution(['a', 'b', 'c'], ['a b', 'b a', 'c a', 'a c', 'a c', 'c a']);
