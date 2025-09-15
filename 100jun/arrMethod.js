@@ -8,15 +8,14 @@ let arrTestA = Array(5).fill(0);
 let failedArrTestB = Array(5).fill(Array(5).fill(1));
 failedArrTestB[1][2] = 3; // 참조라 같이변함
 let arrTestB = Array(5)
-  .fill()
-  .map(() => Array(5).fill(1));
+	.fill()
+	.map(() => Array(5).fill(1));
 arrTestB[1][2] = 3;
-// console.log(failedArrTestB, arrTestB);
 
 let arrTestC = Array.from(Array(4), () => new Array(5).fill(0));
-arrTestC[1][2] = 3; // 참조라 같이변함
+arrTestC[1][2] = 3;
 
-// console.log(arrTestC);
+// console.log(arrTestC, '참조아님');
 
 let arr = [1, 2, 3, 4, 5];
 let arr2 = [4, 5, 6, 7, 8];
