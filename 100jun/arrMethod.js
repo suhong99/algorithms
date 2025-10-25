@@ -41,7 +41,7 @@ const uniqueNums = [...new Set(nums)];
 
 const arrSlice = [1, 2, 3, 4, 5];
 const arrSliced = arrSlice.slice(1, 3); //[2,3]
-// console.log(arrSliced); // 시작에서 끝 -1
+console.log(arrSliced); // 시작에서 끝 -1이 출력됨. // [2,3]  // 1에서 시작해서 2번쨰 인덱스까지
 // console.log(arrSlice.indexOf(3));
 
 // find, findIndex,includes, substring,slice ,Object.keys, Object.values,Object.entries
