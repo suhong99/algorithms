@@ -1,5 +1,5 @@
-//school.programmers.co.kr/learn/courses/30/lessons/42747?language=javascript#
-https: function solution(citations) {
+// https://school.programmers.co.kr/learn/courses/30/lessons/42747?language=javascript#
+function solution(citations) {
 	citations.sort((a, b) => a - b);
 	const l = citations.length;
 
